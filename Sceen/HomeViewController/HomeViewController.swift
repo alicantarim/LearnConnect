@@ -1,18 +1,18 @@
 //
-//  MockViewController.swift
+//  HomeViewViewController.swift
 //  LearnConnect
 //
-//  Created by Alican TARIM on 22.11.2024.
+//  Created by Alican TARIM on 25.11.2024.
 //
 
 import UIKit
 
-class MockViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
     }
 
 

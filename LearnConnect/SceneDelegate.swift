@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,13 +15,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        // let _ yerine sceen olarak veriyoruz.
         guard let sceen = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: sceen)
         window?.makeKeyAndVisible()
-        window?.rootViewController = MockViewController(nibName: "MockViewController", bundle: nil)
+        
+        // currentUser: Güncel kullanıcı bilgisini alıyoruz.
+        let currentUser = Auth.auth().currentUser
+            
+        if currentUser != nil {
+            let tabController = MainTabBarViewController()
+            print("TabBar Açılıyor.")
+            window?.rootViewController = tabController
+        } else {
+            print("LoginView Açılıyor.")
+            window?.rootViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //            let vc = MockViewController(nibName: "MockViewController", bundle: nil)

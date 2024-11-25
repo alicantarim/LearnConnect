@@ -1,18 +1,18 @@
 //
-//  LoginViewController.swift
+//  FavoriteViewController.swift
 //  LearnConnect
 //
-//  Created by Alican TARIM on 22.11.2024.
+//  Created by Alican TARIM on 25.11.2024.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class FavoriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
     }
 
 

@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController {
         do {
             try Auth.auth().signOut()
             let loginPageVC = LoginViewController()
+            loginPageVC.modalPresentationStyle = .fullScreen
             self.present(loginPageVC, animated: true)
         } catch {
             print(error.localizedDescription)

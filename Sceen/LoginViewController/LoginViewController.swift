@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
         let signInPageVC = SignInViewController()
+        signInPageVC.modalPresentationStyle = .fullScreen
         self.present(signInPageVC, animated: true)
     }
     
@@ -67,6 +68,7 @@ class LoginViewController: UIViewController {
                     } else {
                         print("Kullanıcı Oluşturuldu.")
                         let homePageVC = MainTabBarViewController()
+                        homePageVC.modalPresentationStyle = .fullScreen
                         self.present(homePageVC, animated: true)
                     }
                 }
@@ -86,6 +88,12 @@ extension UITextField {
         leftView = imageContainerView
         leftViewMode = .always
         self.tintColor = .black
+    }
+    
+    func cornerRadius(radius: CGFloat) {
+        let radius = layer.cornerRadius = radius
+        let bounds = layer.masksToBounds = true
+        
     }
 }
 

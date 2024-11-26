@@ -17,6 +17,9 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.emailTextField.imageSetup(imageNamed: "mail.stack")
+        self.passwordTextField.imageSetup(imageNamed: "lock.fill")
+        
         signInButton.layer.cornerRadius = 10
         signInButton.layer.masksToBounds = true
 
@@ -50,6 +53,7 @@ class SignInViewController: UIViewController {
                     } else {
                         print("Kullanıcı Oluşturuldu.")
                         let homePageVC = MainTabBarViewController()
+                        homePageVC.modalPresentationStyle = .fullScreen
                         self.present(homePageVC, animated: true)
                     }
                 }

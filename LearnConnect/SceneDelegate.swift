@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,8 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         if currentUser != nil {
             let tabController = MainTabBarViewController()
-            print("TabBar Açılıyor.")
-            window?.rootViewController = tabController
+            print("👉🏼 TabBar Açılıyor.")
+            if let userUID = currentUser?.uid, let userEmail = currentUser?.email {
+                print("👨🏼‍💻 Kullanıcı Email: \(userEmail)")
+                print("🆔 Kullanıcı UID  : \(userUID)")
+                window?.rootViewController = tabController
+            }
         } else {
             print("LoginView Açılıyor.")
             window?.rootViewController = LoginViewController(nibName: "LoginViewController", bundle: nil)

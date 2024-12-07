@@ -15,24 +15,30 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var favoriteButton: UIButton!
     
+    @IBOutlet weak var favoriteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func comminInit(title: String, subTitle: String, videoUrl: String) {
-        self.titleLabel.text = title
-        self.subTitleLabel.text = subTitle
+    func configure(with data: MockData) {
         
-        let url = URL(string: videoUrl)
+        self.titleLabel.text = data.title
+        self.subTitleLabel.text = data.description
+        //self.registerButton.titleLabel?.font = .systemFont(ofSize: 11.0, weight: .semibold)
+
+        
+        let url = URL(string: data.urlString)
         self.getThumbnailFromVideoURL(url: url!) { (thumbnailImage) in
             self.thumbnailImageView.image = thumbnailImage
         }
+        
+        registerButton.cornerRadius(radius: 5)
         
     }
     

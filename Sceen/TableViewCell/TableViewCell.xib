@@ -31,45 +31,18 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="K56-xh-Ve2">
                                 <rect key="frame" x="157" y="8" width="143" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <color key="textColor" red="0.090196078431372548" green="0.103553243" blue="0.25531378389999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jap-VG-Rix">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jap-VG-Rix">
                                 <rect key="frame" x="157" y="28" width="143" height="108"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="108" id="7h3-hL-hkC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-bg-4Jq">
-                                <rect key="frame" x="8" y="111" width="101.33333333333333" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="g02-Kb-z39"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Derse Kayıt Ol">
-                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="11"/>
-                                    <color key="baseBackgroundColor" red="0.38323247430000001" green="0.37676602599999998" blue="0.59817409519999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="registerButtoın:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="t8z-Ok-ZbN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wv-4f-Kky">
-                                <rect key="frame" x="124" y="111" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="A4n-vk-xrr"/>
-                                    <constraint firstAttribute="width" constant="25" id="zQG-dY-HWB"/>
-                                </constraints>
-                                <color key="tintColor" red="0.94323712589999997" green="0.83262580630000005" blue="0.48248183729999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                                <connections>
-                                    <action selector="favoriteButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8EQ-N8-QaC"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOo-Zu-P8x">
                                 <rect key="frame" x="10" y="10" width="137" height="96"/>
                                 <constraints>
@@ -83,23 +56,48 @@
                                     <action selector="playButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8i1-Wm-rRN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-mZ-9Rj">
+                                <rect key="frame" x="126" y="117" width="21" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.94509803921568625" green="0.83137254901960778" blue="0.4823529411764706" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                <connections>
+                                    <action selector="favoriteButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3Lt-He-YJ9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tt6-jA-2uZ">
+                                <rect key="frame" x="8" y="115" width="102" height="25"/>
+                                <color key="backgroundColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="7b1-ou-Km0"/>
+                                    <constraint firstAttribute="width" constant="102" id="qgc-IR-ozt"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="secondarySystemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Derse Kayıt Ol">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="registerButtoın:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JL6-Vf-oEE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lYy-bg-4Jq" firstAttribute="top" secondItem="iU1-7R-DWH" secondAttribute="bottom" constant="3" id="21n-Om-x73"/>
                             <constraint firstItem="jap-VG-Rix" firstAttribute="top" secondItem="K56-xh-Ve2" secondAttribute="bottom" constant="3" id="AOX-R1-aKR"/>
+                            <constraint firstItem="Tt6-jA-2uZ" firstAttribute="leading" secondItem="kSf-qZ-qHB" secondAttribute="leading" constant="8" id="C6L-gG-a8s"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jap-VG-Rix" secondAttribute="bottom" constant="10" id="HgE-tg-tp9"/>
                             <constraint firstItem="iU1-7R-DWH" firstAttribute="top" secondItem="kSf-qZ-qHB" secondAttribute="top" constant="8" id="K3U-jK-y4g"/>
                             <constraint firstAttribute="trailing" secondItem="K56-xh-Ve2" secondAttribute="trailing" constant="8" id="TZ2-UL-1rl"/>
                             <constraint firstItem="iU1-7R-DWH" firstAttribute="leading" secondItem="kSf-qZ-qHB" secondAttribute="leading" constant="8" id="WVp-44-cML"/>
                             <constraint firstItem="jap-VG-Rix" firstAttribute="leading" secondItem="iU1-7R-DWH" secondAttribute="trailing" constant="8" id="YGs-bq-je6"/>
                             <constraint firstAttribute="trailing" secondItem="jap-VG-Rix" secondAttribute="trailing" constant="8" id="b1P-Tk-iSG"/>
-                            <constraint firstItem="9Wv-4f-Kky" firstAttribute="top" secondItem="iU1-7R-DWH" secondAttribute="bottom" constant="3" id="c2P-9n-BaO"/>
+                            <constraint firstItem="Tt6-jA-2uZ" firstAttribute="top" secondItem="iU1-7R-DWH" secondAttribute="bottom" constant="7" id="c8i-sZ-CQ8"/>
                             <constraint firstItem="ZOo-Zu-P8x" firstAttribute="centerX" secondItem="iU1-7R-DWH" secondAttribute="centerX" id="cdX-9s-5kG"/>
                             <constraint firstItem="ZOo-Zu-P8x" firstAttribute="centerY" secondItem="iU1-7R-DWH" secondAttribute="centerY" id="dHO-F8-Z0N"/>
-                            <constraint firstItem="lYy-bg-4Jq" firstAttribute="leading" secondItem="kSf-qZ-qHB" secondAttribute="leading" constant="8" id="f6Z-Ez-okB"/>
                             <constraint firstItem="K56-xh-Ve2" firstAttribute="top" secondItem="kSf-qZ-qHB" secondAttribute="top" constant="8" id="fXr-1S-Txr"/>
                             <constraint firstItem="K56-xh-Ve2" firstAttribute="leading" secondItem="iU1-7R-DWH" secondAttribute="trailing" constant="8" id="gX1-ar-6Xa"/>
-                            <constraint firstItem="9Wv-4f-Kky" firstAttribute="leading" secondItem="lYy-bg-4Jq" secondAttribute="trailing" constant="14.67" id="oTX-Ml-iNO"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -117,9 +115,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="favoriteButton" destination="9Wv-4f-Kky" id="F7E-UL-zji"/>
+                <outlet property="favoriteButton" destination="3p4-mZ-9Rj" id="Tgz-Ae-wUH"/>
                 <outlet property="playButton" destination="ZOo-Zu-P8x" id="xZM-N1-1h3"/>
-                <outlet property="registerButton" destination="lYy-bg-4Jq" id="n9C-QW-gAU"/>
+                <outlet property="registerButton" destination="Tt6-jA-2uZ" id="yUK-f9-ldV"/>
                 <outlet property="subTitleLabel" destination="jap-VG-Rix" id="cA1-mP-bYr"/>
                 <outlet property="thumbnailImageView" destination="iU1-7R-DWH" id="0Df-jw-swC"/>
                 <outlet property="titleLabel" destination="K56-xh-Ve2" id="l4o-vW-TNX"/>
@@ -130,14 +128,17 @@
     <resources>
         <image name="play.circle" catalog="system" width="128" height="123"/>
         <image name="star" catalog="system" width="128" height="116"/>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

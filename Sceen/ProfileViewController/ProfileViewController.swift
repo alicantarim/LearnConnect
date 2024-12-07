@@ -12,12 +12,17 @@ import FirebaseAuth
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var userNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         logOutButton.layer.cornerRadius = 10
         logOutButton.layer.masksToBounds = true
+        
+        let currentUser = Auth.auth().currentUser
+        
+        userNameLabel.text = currentUser?.email
 
         // Do any additional setup after loading the view.
     }

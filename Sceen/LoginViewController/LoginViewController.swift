@@ -26,15 +26,21 @@ class LoginViewController: UIViewController {
         self.emailTextField.imageSetup(imageNamed: "mail.stack")
         self.passwordTextField.imageSetup(imageNamed: "lock.fill")
         
-        loginButton.layer.cornerRadius = 10
-        loginButton.layer.masksToBounds = true
-        signInButton.layer.cornerRadius = 10
-        signInButton.layer.masksToBounds = true
+//        loginButton.layer.cornerRadius = 10
+//        loginButton.layer.masksToBounds = true
+//        signInButton.layer.cornerRadius = 10
+//        signInButton.layer.masksToBounds = true
+//        
+//        emailTextField.layer.cornerRadius = 10
+//        emailTextField.layer.masksToBounds = true
+//        passwordTextField.layer.cornerRadius = 10
+//        passwordTextField.layer.masksToBounds = true
         
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.masksToBounds = true
-        passwordTextField.layer.cornerRadius = 10
-        passwordTextField.layer.masksToBounds = true
+        loginButton.cornerRadius(radius: 10)
+        signInButton.cornerRadius(radius: 10)
+        
+        emailTextField.cornerRadius(radius: 20)
+        passwordTextField.cornerRadius(radius: 20)
     }
 
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -91,9 +97,30 @@ extension UITextField {
     }
     
     func cornerRadius(radius: CGFloat) {
-        let radius = layer.cornerRadius = radius
-        let bounds = layer.masksToBounds = true
-        
+        layer.cornerRadius = radius
+        layer.masksToBounds = true
+    }
+}
+
+extension UIButton {
+    func cornerRadius(radius: CGFloat) {
+        layer.cornerRadius = radius
+        layer.masksToBounds = true
+    }
+    
+    func buttonStyle(backgroundColor: String, title: String, titleColor: UIColor) {
+        layer.backgroundColor = UIColor(hex: backgroundColor).cgColor
+        setTitle(title, for: .normal)
+        if let attrFont = UIFont(name: "Helvetica", size: 11) {
+                   let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
+                   setAttributedTitle(attrTitle, for: UIControl.State.normal)
+               }
+        setTitleColor(titleColor, for: .normal)
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: 102),
+            heightAnchor.constraint(equalToConstant: 25)
+        ])
     }
 }
 

@@ -9,6 +9,10 @@ import UIKit
 import AVKit
 import AVFoundation
 
+protocol TableViewCellDelegate: AnyObject {
+    func registerButtonTapped(sender: UIButton)
+}
+
 class TableViewCell: UITableViewCell {
 
     
@@ -21,12 +25,15 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoriteButton: UIButton!
     
+    weak var delegate: TableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        registerButton.addTarget(self, action: #selector(registerButtoın(_:)), for: .touchUpInside)
     }
     
-    func configure(with data: MockData) {
+    func configure(with data: MockData, isRegistered: Bool = false) {
         
         self.titleLabel.text = data.title
         self.subTitleLabel.text = data.description
@@ -40,6 +47,12 @@ class TableViewCell: UITableViewCell {
         
         registerButton.cornerRadius(radius: 5)
         
+        // isRegistered’ı configure içinde yapmamız daha temiz olur.
+        if isRegistered {
+            registerButton.buttonStyle(backgroundColor: "323031", title: "Kayıtlı Ders", titleColor: .white)
+        } else {
+            registerButton.buttonStyle(backgroundColor: "5856D6", title: "Derse Kayıt Ol", titleColor: .white)
+        }
     }
     
     //MARK: - Favorite Button
@@ -48,8 +61,8 @@ class TableViewCell: UITableViewCell {
     }
     
     //MARK: - Register Button
-    @IBAction func registerButtoın(_ sender: UIButton) {
-        
+    @IBAction @objc func registerButtoın(_ sender: UIButton) {
+        delegate?.registerButtonTapped(sender: sender)
     }
     
     //MARK: - Play Button
@@ -77,13 +90,9 @@ class TableViewCell: UITableViewCell {
                 DispatchQueue.main.async {
                     completion(thumbImage)
                 }
-
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
-
- 
-    
 }

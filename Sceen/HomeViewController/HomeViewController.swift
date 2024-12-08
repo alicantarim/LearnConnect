@@ -24,6 +24,9 @@ class HomeViewController: UIViewController {
     let currentUser = Auth.auth().currentUser
     var context: NSManagedObjectContext?
     
+    // var isSavedData = false -> Bunu yoruma almamın sebebi kaldırıldığını gör istedim.Bunun yerine
+    //aşağıda bir check fonksiyonu oluşturdum , o da bir boolean veriyor.
+    
     var mockDatas: [MockData] = [
         .init(lessonId: 0,
               title: "Big Buck Bunny",
@@ -99,24 +102,26 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = mockDatas[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as? TableViewCell
-        cell?.configure(with: data)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
+        let isRegistered = checkIfLessonRegistered(lessonId: data.lessonId)
+        cell.configure(with: data, isRegistered: isRegistered)
         
         
         // Play Button Tapped.
-        cell?.playButton.tag = indexPath.row
-        cell?.playButton.addTarget(self, action: #selector(playVideoButtonTapped(_:)), for: .touchUpInside)
+        cell.playButton.tag = indexPath.row
+        cell.playButton.addTarget(self, action: #selector(playVideoButtonTapped(_:)), for: .touchUpInside)
         
         // Register Button Tapped.
-        cell?.registerButton.tag = indexPath.row
-        cell?.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
+        cell.registerButton.tag = indexPath.row
+        //cell.registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
         
         //Favorite Button Tapped.
-        cell?.favoriteButton.tag = indexPath.row
-        cell?.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
         
-        cell?.selectionStyle = .none
-        return cell!
+        
+        cell.selectionStyle = .none
+        return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -143,79 +148,41 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    //MARK: Register Button
-    @objc func registerButtonTapped(_ sender: UIButton) {
-        let rowIndex = sender.tag
-        
-        let mockData = mockDatas[rowIndex]
-        if sender.isSelected {
-            sender.isSelected = false
-            sender.buttonStyle(backgroundColor: "5856D6", title: "Derse Kayıt Ol", titleColor: .white)
-            print("\(rowIndex). Derse kayıt silindi.")
-        } else {
-            sender.isSelected = true
-            sender.buttonStyle(backgroundColor: "323031", title: "Kayıtlı Ders", titleColor: .black)
-            guard let context = context else { fatalError("Context is not initialized") }
-            registerLessons(context: context, mockData: [mockData])
-            print("\(rowIndex). Derse kayıt yapıldı.")
-        }
-    }
-        
-    func registerLessons(context: NSManagedObjectContext, mockData: [MockData]) {
-        let currentUser = Auth.auth().currentUser
+    
+    func registerLessons(context: NSManagedObjectContext, lessonData: MockData) {
+        //let currentUser = Auth.auth().currentUser
         
         do {
-            // MockData dizisini JSON olarak kodlayın
-            let jsonData = try JSONEncoder().encode(mockData) // Dizinin tamamını kodluyoruz
-            
-            // Fetch Request ile mevcut kullanıcıyı kontrol et
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Users")
+            // Önce mevcut kayıtlı dersleri al
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Users")
             let results = try context.fetch(fetchRequest)
-            
             let userEntity: NSManagedObject
+            var existingLessons: [MockData] = []
+            
             if let existingUser = results.first {
                 // Mevcut kullanıcıyı güncelle
                 userEntity = existingUser
+                // Mevcut dersleri al
+                if let savedData = existingUser.value(forKey:"registerLessons") as? Data {
+                    existingLessons = try JSONDecoder().decode([MockData].self, from: savedData)
+                }
             } else {
                 // Yeni kullanıcı oluştur
-                userEntity = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context)
+                userEntity = NSEntityDescription.insertNewObject(forEntityName: "Users", into:context)
             }
-            
+            // Yeni dersi ekle
+            existingLessons.append(lessonData)
+            // Güncellenmiş dersleri JSON olarak kodla
+            let jsonData = try JSONEncoder().encode(existingLessons)
             // Veriyi kaydet
             userEntity.setValue(jsonData, forKey: "registerLessons")
             
             try context.save()
             print("✅ Kurs bilgileri CoreData'ya aktarıldı.")
-            
-            // Veriyi okuma
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Users")
-                
-                do {
-                    let results = try context.fetch(fetchRequest)
-                    if let firstResult = results.first,
-                       let jsonData = firstResult.value(forKey: "registerLessons") as? Data {
-                        // JSON verisini MockData dizisine dönüştür
-                        let decodedMockData = try JSONDecoder().decode([MockData].self, from: jsonData)
-                        
-                        // Verileri yazdır
-                        for mockData in decodedMockData {
-                            print("Lesson ID: \(mockData.lessonId)")
-                            print("Title: \(mockData.title)")
-                            print("Description: \(mockData.description)")
-                            print("URL: \(mockData.urlString)")
-                            print("--------------------")
-                        }
-                    }
-                } catch {
-                    print("Veri okuma hatası: \(error)")
-                }
-            }
         } catch {
             print("Veri kaydetme hatası: \(error)")
         }
     }
-    
     
     // MockData dizisinin geri okunması. (Kaydedilen registerLessons verisini tekrar "MockData" nesnelerine dönüştürmek için.
     func fetchMockData(context: NSManagedObjectContext) -> [MockData]? {
@@ -264,6 +231,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
 }
+    
+    
+    
 
 extension UIColor {
     convenience init(hex: String) {
@@ -281,4 +251,33 @@ extension UIColor {
     }
 }
 
+extension HomeViewController {
+// tuttuğumuz isSavedData booelan değerini kaldırıp derse kayıt olundu mu olunmadı mı diye bakan bir fonksiyon yazdık , bu bir boolean return ediyor ve parametre ekledik hangi derse kayıt olunduysa onun ID’sini gösteriyor parametre.
+    func checkIfLessonRegistered(lessonId: Int) -> Bool {
+        guard let context = context else { return false }
+        if let savedMockData = fetchMockData(context: context) {
+            return savedMockData.contains { $0.lessonId == lessonId }
+        }
+        return false
+    }
+    func updateTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension HomeViewController: TableViewCellDelegate {
+    func registerButtonTapped(sender: UIButton) {
+        let rowIndex = sender.tag
+        let mockData = mockDatas[rowIndex]
+        
+        guard let context = context else { return }
+        
+        if !checkIfLessonRegistered(lessonId: mockData.lessonId) {
+            registerLessons(context: context, lessonData: mockData)
+            updateTableView()
+        }
+    }
+}
 

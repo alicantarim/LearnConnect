@@ -39,7 +39,7 @@
 		BE436B5D2D13F1C00055B96F /* Exceptions for "LearnConnect" folder in "LearnConnect" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = BE436B312D13F1BF0055B96F /* LearnConnect */;
 		};
@@ -304,7 +304,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2ZDN9WVFBD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LearnConnect/Info.plist;
+				INFOPLIST_FILE = LearnConnect/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -336,7 +336,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2ZDN9WVFBD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LearnConnect/Info.plist;
+				INFOPLIST_FILE = LearnConnect/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

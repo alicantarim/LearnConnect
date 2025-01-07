@@ -17,12 +17,6 @@ struct MockData: Codable {
     let courseImage: String
 }
 
-// kayıt olma butonunun fonksiyonunu hazırla
-// favori olma butonunun fonksiyonunu hazırla
-//video image'ı çek
-//video oynatma ekranını yap
-//giriş yap ekranı
-
 class FeedViewController: UIViewController {
     
     var mockDatas: [MockData] = [
@@ -91,8 +85,8 @@ class FeedViewController: UIViewController {
             savedCourses = decodedCourses
         }
         
-//        eğer o data ekliyse bir daha bastığında o datayı sil değilse ekle
-//        UserDefaults.standard.removeObject(forKey: "savedCourses")
+        // Eğer o data ekliyse bir daha bastığında o datayı sil değilse ekle
+        // UserDefaults.standard.removeObject(forKey: "savedCourses")
         // Eğer ders kayıtlıysa, sil; değilse ekle
         if let index = savedCourses.firstIndex(where: { $0.lessonId == willSaveCourse.lessonId }) {
             savedCourses.remove(at: index)
